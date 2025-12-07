@@ -56,3 +56,10 @@ class ItemRepository:
         ).order_by(
             ImportedItem.created_at.desc()
         ).limit(limit).all()
+    
+    def delete_by_job(self, job_id: int) -> None:
+        """Delete all items for a job"""
+        self.db.query(ImportedItem).filter(
+            ImportedItem.job_id == job_id
+        ).delete()
+        self.db.commit()

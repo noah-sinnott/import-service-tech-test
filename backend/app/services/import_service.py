@@ -17,9 +17,9 @@ class ImportService:
     async def process_import_job(job_id: int, sources: List[str]) -> None:
         """Background task to process import job"""
         db = SessionLocal()
+        job_repo = JobRepository(db)
         
         try:
-            job_repo = JobRepository(db)
             item_repo = ItemRepository(db)
             external_api = ExternalApiService()
             
@@ -67,7 +67,10 @@ class ImportService:
             job_repo.update_status(job_id, "Completed")
             
         except Exception as e:
-            job_repo = JobRepository(db)
+            # Rollback any pending transaction before updating status
+            db.rollback()
+            # Delete any partially imported items from failed attempt
+            item_repo.delete_by_job(job_id)
             job_repo.update_status(job_id, "Failed", str(e))
         finally:
             db.close()
