@@ -1,0 +1,118 @@
+.checkbox-group {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+  .checkbox-group {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  padding: 1.25rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fafafa;
+  transition: all 0.2s;
+}
+
+.checkbox-label:hover {
+  border-color: #3498db;
+  background: #f0f8ff;
+}
+
+.checkbox-label input:checked + span {
+  font-weight: 600;
+  color: #3498db;
+}
+
+.checkbox-label:has(input:checked) {
+  border-color: #3498db;
+  background: #e3f2fd;
+  box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
+}
+
+.checkbox-label input {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  accent-color: #3498db;
+  margin: 0;
+  flex-shrink: 0;
+  display: block;
+}
+
+.checkbox-label span {
+  font-size: 1rem;
+  text-transform: capitalize;
+  line-height: 1.4;
+  display: block;
+}
+
+.credentials-section {
+  padding: 1.25rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  border: 1px solid #e9ecef;
+}
+
+.credentials-section h3 {
+  color: #2c3e50;
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+  text-transform: capitalize;
+}
+
+.auth-type-group {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.auth-type-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex: 1;
+  min-width: 120px;
+  justify-content: center;
+}
+
+.auth-type-group label:hover {
+  border-color: #3498db;
+}
+
+.auth-type-group label:has(input:checked) {
+  border-color: #3498db;
+  background: #e3f2fd;
+  font-weight: 600;
+}
+
+.connected-badge {
+  padding: 0.75rem 1rem;
+  background: #d4edda;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.oauth-button {
+  width: 100%;
+}
