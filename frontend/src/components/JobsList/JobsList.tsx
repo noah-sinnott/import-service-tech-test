@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { api, ImportJob } from '../../api';
 import './JobsList.css';
 
@@ -27,7 +27,7 @@ const JobsList: React.FC = () => {
     }
   };
 
-  const pollActiveJobs = async () => {
+  const pollActiveJobs = useCallback(async () => {
     if (activeJobIds.length === 0) return;
     
     try {
@@ -53,7 +53,7 @@ const JobsList: React.FC = () => {
     } catch (err) {
       console.error('Polling error:', err);
     }
-  };
+  }, [activeJobIds]);
 
   useEffect(() => {
     loadJobs();
