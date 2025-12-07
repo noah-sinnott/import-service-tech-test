@@ -65,7 +65,7 @@ const JobsList: React.FC = () => {
     const interval = setInterval(pollActiveJobs, 2000);
 
     return () => clearInterval(interval);
-  }, [activeJobIds]);
+  }, [activeJobIds, pollActiveJobs]);
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleString();
