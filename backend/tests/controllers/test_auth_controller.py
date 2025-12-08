@@ -85,26 +85,3 @@ def test_login_nonexistent_user(client):
         "password": "password123"
     })
     assert response.status_code == 401
-
-
-def test_get_current_user(client, auth_headers):
-    """Test getting current user info"""
-    response = client.get("/api/v1/auth/me", headers=auth_headers)
-    assert response.status_code == 200
-    data = response.json()
-    assert "id" in data
-    assert "email" in data
-    assert "username" in data
-    assert data["username"] == "testuser"
-
-
-def test_get_current_user_no_token(client):
-    """Test getting current user without token fails"""
-    response = client.get("/api/v1/auth/me")
-    assert response.status_code == 401
-
-
-def test_get_current_user_invalid_token(client):
-    """Test getting current user with invalid token fails"""
-    response = client.get("/api/v1/auth/me", headers={"Authorization": "Bearer invalid"})
-    assert response.status_code == 401

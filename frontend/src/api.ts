@@ -141,22 +141,6 @@ export const api = {
     return data;
   },
 
-  async getCurrentUser(): Promise<User> {
-    const response = await fetch(`${API_BASE_URL}/auth/me`, {
-      headers: getAuthHeaders(),
-    });
-    
-    if (!response.ok) {
-      if (response.status === 401) {
-        authUtils.removeToken();
-      }
-      const error = await response.json();
-      throw new Error(error.detail || 'Failed to get user');
-    }
-    
-    return response.json();
-  },
-
   logout() {
     authUtils.removeToken();
   },

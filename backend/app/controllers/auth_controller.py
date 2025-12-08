@@ -82,30 +82,3 @@ def login(request: UserLoginRequest, db: Session = Depends(get_db)):
     )
     
     return Token(access_token=access_token, token_type="bearer")
-
-
-@router.get("/me", response_model=UserResponse)
-def get_current_user_info(
-    credentials: HTTPAuthorizationCredentials = Depends(security),
-    db: Session = Depends(get_db)
-):
-    """Get current user information"""
-    token_data = AuthService.decode_access_token(credentials.credentials)
-    
-    if token_data is None:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Could not validate credentials",
-            headers={"WWW-Authenticate": "Bearer"}
-        )
-    
-    user_repo = UserRepository(db)
-    user = user_repo.get_by_id(token_data.user_id)
-    
-    if user is None:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="User not found"
-        )
-    
-    return UserResponse.model_validate(user)
