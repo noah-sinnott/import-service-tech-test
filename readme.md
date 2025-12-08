@@ -5,7 +5,7 @@ Full-stack data import service with FastAPI backend and React frontend.
 ## Setup
 
 ```bash
-# Run all in one (reccomended)
+# Run all in one (Recommended)
 ./run.ps1
 
 # Or run manually
